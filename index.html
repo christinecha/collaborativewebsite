@@ -3,10 +3,42 @@
   <head>
     <meta charset="utf-8">
     <title>Collaborative Website</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Baloo+Da|Inconsolata|Libre+Baskerville|Open+Sans" rel="stylesheet">
+    <link href="./dist/index.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyB73WDB1cjIubCf-2SOW8b0OgJSPjZxdLk",
+        authDomain: "collaborative-website.firebaseapp.com",
+        databaseURL: "https://collaborative-website.firebaseio.com",
+        storageBucket: "",
+      };
+
+      firebase.initializeApp(config)
+    </script>
   </head>
+
   <body>
     <div id="menu"></div>
+
+    <div id="node-editor">
+      <select id="node-font" name="font">
+        <option value="open-sans">Open Sans</option>
+        <option value="inconsolata">Inconsolata</option>
+        <option value="abril-fatface">Abril Fatface</option>
+        <option value="baloo-da">Baloo Da</option>
+        <option value="libre-baskerville">Libre Baskerville</option>
+      </select>
+      <input id="node-text" type="text" />
+      <button id="submit-node">add</button>
+    </div>
+
     <div id="main-content"></div>
+
     <script src="./dist/bundle.js"></script>
   </body>
+
 </html>

@@ -1,0 +1,34 @@
+.text-node {
+  position: absolute;
+}
+.text-node[font="open-sans"] {
+  font-family: 'Open Sans';
+}
+.text-node[font="inconsolata"] {
+  font-family: 'Inconsolata';
+}
+.text-node[font="abril-fatface"] {
+  font-family: 'Abril Fatface';
+}
+.text-node[font="baloo-da"] {
+  font-family: 'Baloo Da';
+}
+.text-node[font="libre-baskerville"] {
+  font-family: 'Libre Baskerville';
+}
+.text-node.preview-mode {
+  border: 2px solid blue;
+  padding: 5px;
+  margin: -5px;
+}
+#node-editor {
+  display: none;
+  position: absolute;
+  margin-top: -40px;
+  margin-left: -10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  z-index: 1;
+}
+
+/*# sourceMappingURL=index.css.map */
