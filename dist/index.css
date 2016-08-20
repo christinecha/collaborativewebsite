@@ -83,6 +83,14 @@ p {
 #node-editor[type=text] #node-image-src {
   display: none;
 }
+#node-editor #submit-node {
+  padding: 5px;
+  color: #fff;
+  background-color: blue;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+}
 #wtf {
   display: inline-block;
   max-width: 300px;
