@@ -1,3 +1,32 @@
+* {
+  font-family: 'Inconsolata', monospace;
+  margin: 0 0;
+  padding: 0 0;
+}
+p {
+  font-size: 13px;
+  line-height: 1.5em;
+}
+.xsmall {
+  font-size: 11px;
+}
+.clickable {
+  cursor: pointer;
+}
+#warning {
+  height: 20px;
+  width: 100%;
+  padding: 5px;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+}
+#warning.is-active {
+  background-color: rgba(0, 255, 255, 0.8);
+  display: block;
+}
 .text-node {
   position: absolute;
 }
@@ -6,6 +35,12 @@
 }
 .text-node[font="inconsolata"] {
   font-family: 'Inconsolata';
+}
+.text-node[font="georgia"] {
+  font-family: 'Georgia';
+}
+.text-node[font="helvetica"] {
+  font-family: 'Helvetica';
 }
 .text-node[font="abril-fatface"] {
   font-family: 'Abril Fatface';
@@ -20,6 +55,17 @@
   border: 2px solid blue;
   padding: 5px;
   margin: -5px;
+  z-index: 1;
+}
+.image-node {
+  position: absolute;
+  max-width: 200px;
+}
+.image-node.preview-mode {
+  border: 2px solid blue;
+  padding: 5px;
+  margin: -5px;
+  z-index: 1;
 }
 #node-editor {
   display: none;
@@ -28,7 +74,48 @@
   margin-left: -10px;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 5px;
-  z-index: 1;
+  z-index: 2;
+}
+#node-editor[type=image] #node-text,
+#node-editor[type=image] #node-font {
+  display: none;
+}
+#node-editor[type=text] #node-image-src {
+  display: none;
+}
+#wtf {
+  display: inline-block;
+  max-width: 300px;
+  padding: 10px;
+  margin: 20px 0;
+  z-index: 3;
+  background-color: rgba(255, 255, 255, 0.8);
+  position: relative;
+}
+#wtf .trigger-open:hover,
+#wtf .trigger-close:hover {
+  text-decoration: underline;
+}
+#wtf .trigger-close,
+#wtf .content {
+  display: none;
+}
+#wtf .content {
+  margin: 10px 0;
+}
+#wtf #mailing-list {
+  margin-top: 10px;
+}
+#wtf #mailing-list input,
+#wtf #mailing-list button {
+  padding: 5px;
+}
+#wtf[data-status="opened"] .trigger-close,
+#wtf[data-status="opened"] .content {
+  display: block;
+}
+#wtf[data-status="opened"] .trigger-open {
+  display: none;
 }
 
 /*# sourceMappingURL=index.css.map */

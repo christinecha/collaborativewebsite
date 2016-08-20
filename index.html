@@ -22,17 +22,46 @@
   </head>
 
   <body>
-    <div id="menu"></div>
+    <div id="warning"></div>
+    <div id="wtf">
+      <p class="trigger-open clickable">>> wtf is this</p>
+      <p class="trigger-close clickable"><< okay, got it</p>
+      <div class="content">
+        <p>
+          <b>It's a collaborative website.</b>
+          <br />
+          Click around to add text or images. All your changes will be immediately
+          live when you hit "add", and will stay publicly visible on the site for
+          exacly <b>five (5) minutes.</b>
+        </p>
+        <br />
+        <p class="xsmall">
+          P.S. I am making a mailing list because I keep making projects like this
+          and then am like, 'damn... why don't I have a mailing list'
+        </p>
+        <form id="mailing-list">
+          <input id="email-input" placeholder="so give me your email" type="email" />
+          <button>submit</button>
+        </form>
+      </div>
+    </div>
 
-    <div id="node-editor">
+    <div id="node-editor" type="text">
+      <select id="node-type" name="type">
+        <option value="text">Text</option>
+        <option value="image">Image</option>
+      </select>
       <select id="node-font" name="font">
-        <option value="open-sans">Open Sans</option>
         <option value="inconsolata">Inconsolata</option>
+        <option value="open-sans">Open Sans</option>
+        <option value="georgia">Georgia</option>
         <option value="abril-fatface">Abril Fatface</option>
         <option value="baloo-da">Baloo Da</option>
+        <option value="helvetica">Helvetica</option>
         <option value="libre-baskerville">Libre Baskerville</option>
       </select>
-      <input id="node-text" type="text" />
+      <input id="node-text" type="text" maxlength="100" />
+      <input id="node-image-src" type="text" />
       <button id="submit-node">add</button>
     </div>
 

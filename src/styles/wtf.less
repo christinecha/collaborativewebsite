@@ -1,0 +1,35 @@
+#wtf {
+  display: inline-block;
+  max-width: 300px;
+  padding: 10px;
+  margin: 20px 0;
+  z-index: 3;
+  background-color: rgba(255,255,255,0.8);
+  position: relative;
+
+  .trigger-open:hover,
+  .trigger-close:hover {
+    text-decoration: underline;
+  }
+
+  .trigger-close,
+  .content { display: none; }
+
+  .content {
+    margin: 10px 0;
+  }
+
+  #mailing-list {
+    margin-top: 10px;
+
+    input, button {
+      padding: 5px;
+    }
+  }
+
+  &[data-status="opened"] {
+    .trigger-close,
+    .content { display: block; }
+    .trigger-open { display: none; }
+  }
+}

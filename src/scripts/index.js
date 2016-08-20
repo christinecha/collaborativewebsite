@@ -1,20 +1,62 @@
 import NodeEditor from './nodes/node-editor'
 import TextNode from './nodes/text-node'
+import ImageNode from './nodes/image-node'
 import { isValidNode } from './nodes'
+import { isValidImageSrc } from './utils/image-link-validation'
+
+const $editor = document.getElementById('node-editor')
+const $wtf = document.getElementById('wtf')
+const $warning = document.getElementById('warning')
+const $mailingList = document.getElementById('mailing-list')
+const $triggerOpen = document.querySelector('.trigger-open')
+const $triggerClose = document.querySelector('.trigger-close')
 
 const nodesRef = firebase.database().ref('/nodes')
 const nodeEditor = new NodeEditor({
-  handleSubmit: (config) => createNode(config)
+  handleSubmit: (config) => handleSubmitNode(config)
 })
+
+const NODE_CONSTRUCTORS = {
+  text: TextNode,
+  image: ImageNode
+}
 
 let currentUID = null
 let renderedNodes = {}
 
 /* -------------------------------------------------------- */
 
-const createNode = (config) => {
-  if (!isValidNode(config)) return
+const warn = (message) => {
+  $warning.textContent = message
+  $warning.classList.add('is-active')
 
+  setTimeout(() => {
+    $warning.classList.remove('is-active')
+  }, 3000)
+}
+
+const handleSubmitNode = (config) => {
+  // if (!isValidNode(config)) return
+
+  let data = { coords: config.data.coords }
+
+  if (config.type === 'text') {
+    data.text = config.data.text
+    data.font = config.data.font
+    config.data = data
+    createNode(config)
+  }
+
+  if (config.type === 'image') {
+    data.src = config.data.src
+    config.data = data
+    isValidImageSrc(data.src)
+    .then(() => createNode(config))
+    .catch(error => warn(error))
+  }
+}
+
+const createNode = (config) => {
   const node = {
     type: config.type,
     data: config.data,
@@ -29,14 +71,12 @@ const createNode = (config) => {
 
 const renderNodes = (nodes) => {
   for (let i in nodes) {
-    if (nodes[i].type === 'text') {
-      if (renderedNodes[i]) {
-        const node = renderedNodes[i]
-        node.update(nodes[i])
-      } else {
-        const node = new TextNode(nodes[i])
-        renderedNodes[i] = node
-      }
+    if (renderedNodes[i]) {
+      const node = renderedNodes[i]
+      node.update(nodes[i])
+    } else {
+      const NodeConstructor = NODE_CONSTRUCTORS[nodes[i].type]
+      renderedNodes[i] = new NodeConstructor(nodes[i])
     }
   }
 }
@@ -44,23 +84,59 @@ const renderNodes = (nodes) => {
 /* This function watches the value of /nodes and will
 * fire the callback every time the value changes.
 */
+const now = new Date().getTime()
+const fiveMinutesAgo = now - (1000 * 60 * 5)
+
+const cleanNodes = () => {
+  firebase.database().ref('/nodes')
+  .orderByChild('createdAt')
+  .endAt(fiveMinutesAgo)
+  .once('value', snapshot => {
+    const nodes = snapshot.val()
+    for (let i in nodes) {
+      firebase.database().ref(`/nodes/${i}`).remove()
+    }
+  })
+}
+
 const watchNodes = (callback) => {
-  firebase.database().ref('/nodes').on('value', snapshot => {
+  firebase.database().ref('/nodes')
+  .orderByChild('createdAt')
+  .startAt(fiveMinutesAgo)
+  .on('value', snapshot => {
     const nodes = snapshot.val()
     callback(nodes)
   })
 }
 
+/** EVENT LISTENERS ---------------------------------**/
+
 document.addEventListener('click', (e) => {
   const targets = e.path
-  const $editor = document.getElementById('node-editor')
 
   if (targets.indexOf($editor) > -1) return
+  if (targets.indexOf($wtf) > -1) {
+    if (e.target === $triggerOpen) $wtf.setAttribute('data-status', 'opened')
+    if (e.target === $triggerClose) $wtf.setAttribute('data-status', 'closed')
+    return
+  }
 
   const x = e.clientX
   const y = e.clientY
   nodeEditor.renderAt(x, y)
 })
+
+$mailingList.addEventListener('submit', (e) => {
+  e.preventDefault()
+  const email = document.getElementById('email-input').value
+  firebase.database().ref('/emails').push({
+    email: email,
+    createdAt: new Date().getTime()
+  }).then(() => {
+    $mailingList.innerHTML = '<p>you are great</p>'
+  })
+})
+
 
 
 /** Authenticate the user.
@@ -76,5 +152,6 @@ firebase.auth().onAuthStateChanged(auth => {
   }
 
   currentUID = auth.uid
+  cleanNodes()
   watchNodes(renderNodes)
 })

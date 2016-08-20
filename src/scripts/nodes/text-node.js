@@ -16,7 +16,7 @@ class TextNode {
 
     document.body.appendChild(this.$node)
     if (!config) return
-    if (config.previewNode) this.previewNode = config.previewNode
+    if (config.previewMode) this.previewMode = config.previewMode
     if (config.data) {
       this.data = config.data
       this.render()
@@ -37,7 +37,7 @@ class TextNode {
 
   update(config) {
     this.data = config.data
-    this.previewNode = config.previewNode
+    this.previewMode = config.previewMode
     this.render()
   }
 
@@ -50,7 +50,7 @@ class TextNode {
 
     if (this.data.font) this.$node.setAttribute('font', this.data.font)
 
-    if (this.previewNode) this.$node.classList.add('preview-mode')
+    if (this.previewMode) this.$node.classList.add('preview-mode')
     else this.$node.classList.remove('preview-mode')
 
   }
