@@ -1,8 +1,11 @@
 import TextNode from './text-node'
+import ImageNode from './image-node'
 
 const INPUT_TYPES = {
-  'node-text': 'nodeText',
-  'node-font': 'nodeFont'
+  'node-text'      : 'nodeText',
+  'node-type'      : 'nodeType',
+  'node-font'      : 'nodeFont',
+  'node-image-src' : 'nodeImageSrc'
 }
 
 class NodeEditor {
@@ -11,26 +14,37 @@ class NodeEditor {
 
     this.$container = document.getElementById('node-editor')
     this.$submitButton = document.getElementById('submit-node')
+    this.$nodeType = document.getElementById('node-type')
     this.$nodeText = document.getElementById('node-text')
     this.$nodeFont = document.getElementById('node-font')
+    this.$nodeImageSrc = document.getElementById('node-image-src')
 
-    this.previewNode = new TextNode({ previewNode: true })
+    this.previewTextNode = new TextNode({ previewMode: true })
+    this.previewImageNode = new ImageNode({ previewMode: true })
+    this.previewImageNode.hide()
+
+    this.nodeType = 'text'
+    this.nodeFont = 'inconsolata'
 
     this.initEventListeners()
   }
 
   clearFields() {
     this.$nodeText.value = ''
-    this.$nodeFont.value = 'open-sans'
+    this.$nodeFont.value = 'inconsolata'
+    this.$nodeImageSrc.value = ''
 
     this.nodeText = ''
-    this.nodeFont = 'open-sans'
+    this.nodeFont = 'inconsolata'
+    this.nodeImageSrc = ''
 
-    this.previewNode.update(this.getConfig())
+    this.updatePreviewNodes()
   }
 
   initEventListeners() {
     this.$nodeText.addEventListener('keyup', this.handleChange.bind(this))
+    this.$nodeImageSrc.addEventListener('keyup', this.handleChange.bind(this))
+    this.$nodeType.addEventListener('change', this.handleChange.bind(this))
     this.$nodeFont.addEventListener('change', this.handleChange.bind(this))
 
     this.$submitButton.addEventListener('click', this.submitNode.bind(this))
@@ -38,12 +52,13 @@ class NodeEditor {
 
   getConfig() {
     return {
-      previewNode: true,
-      type: 'text',
+      previewMode: true,
+      type: this.nodeType || 'text',
       data: {
+        src: this.nodeImageSrc,
         text: this.nodeText,
         coords: this.coords,
-        font: this.nodeFont || 'open-sans'
+        font: this.nodeFont || 'inconsolata'
       }
     }
   }
@@ -53,31 +68,55 @@ class NodeEditor {
     const key = INPUT_TYPES[e.target.id]
     this[key] = e.target.value
 
-    this.previewNode.update(this.getConfig())
+    this.$container.setAttribute('type', this.nodeType)
+    this.updatePreviewNodes()
+  }
+
+  updatePreviewNodes() {
+    if (this.nodeType === 'text')  {
+      this.previewTextNode.update(this.getConfig())
+      this.previewTextNode.show()
+      this.previewImageNode.hide()
+    }
+
+    if (this.nodeType === 'image') {
+      this.previewImageNode.update(this.getConfig())
+      this.previewImageNode.show()
+      this.previewTextNode.hide()
+    }
   }
 
   hide() {
     this.$container.style.display = 'none'
-    this.previewNode.hide()
+    this.previewTextNode.hide()
+    this.previewImageNode.hide()
   }
 
   renderAt(x, y) {
     this.coords = [x, y]
 
     this.$container.style.display = 'block'
-    this.$container.style.left = x + 'px'
-    this.$container.style.top = y + 'px'
 
-    this.previewNode.update(this.getConfig())
-    this.previewNode.show()
+    if ((window.innerWidth - x) < this.$container.clientWidth) {
+      this.$container.style.right = 0
+      this.$container.style.left = 'auto'
+      this.$container.style.top = y + 'px'
+    } else {
+      this.$container.style.left = x + 'px'
+      this.$container.style.top = y + 'px'
+    }
+
+    this.$nodeText.focus()
+
+    this.updatePreviewNodes()
   }
 
   submitNode(e) {
     e.preventDefault()
     if (this.handleSubmit) this.handleSubmit(this.getConfig())
 
-    this.hide()
     this.clearFields()
+    this.hide()
   }
 }
 

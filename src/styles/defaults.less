@@ -1,0 +1,34 @@
+* {
+  font-family: 'Inconsolata', monospace;
+  margin: 0 0;
+  padding: 0 0;
+}
+
+p {
+  font-size: 13px;
+  line-height: 1.5em;
+}
+
+.xsmall {
+  font-size: 11px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+#warning {
+  height: 20px;
+  width: 100%;
+  padding: 5px;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+
+  &.is-active {
+    background-color: rgba(0, 255, 255, 0.8);
+    display: block;
+  }
+}
