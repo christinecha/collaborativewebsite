@@ -1,3 +1,7 @@
+console.log('----------------------------------------------------------------------')
+console.log('source code ----> https://github.com/christinecha/collaborativewebsite')
+console.log('----------------------------------------------------------------------')
+
 import NodeEditor from './nodes/node-editor'
 import TextNode from './nodes/text-node'
 import ImageNode from './nodes/image-node'
@@ -68,7 +72,7 @@ const createNode = (config) => {
   }
 
   nodesRef.push(node)
-  .then(nodeRef => console.log('Node created at ' + nodeRef.getKey()) )
+  // .then(nodeRef => console.log('Node created at ' + nodeRef.getKey()) )
   .catch(error => console.warn(error) )
 }
 
