@@ -92,12 +92,12 @@ const renderNodes = (nodes) => {
 * fire the callback every time the value changes.
 */
 const now = new Date().getTime()
-const fiveMinutesAgo = now - (1000 * 60 * 5)
+const fifteenMinutesAgo = now - (1000 * 60 * 15)
 
 const cleanNodes = () => {
   firebase.database().ref('/nodes')
   .orderByChild('createdAt')
-  .endAt(fiveMinutesAgo)
+  .endAt(fifteenMinutesAgo)
   .once('value', snapshot => {
     const nodes = snapshot.val()
     for (let i in nodes) {
@@ -109,7 +109,7 @@ const cleanNodes = () => {
 const watchNodes = (callback) => {
   firebase.database().ref('/nodes')
   .orderByChild('createdAt')
-  .startAt(fiveMinutesAgo)
+  .startAt(fifteenMinutesAgo)
   .on('value', snapshot => {
     const nodes = snapshot.val()
     callback(nodes)

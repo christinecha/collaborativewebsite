@@ -61,13 +61,13 @@ b {
   font-size: 11px;
 }
 .text-node[size="medium"] {
-  font-size: 15px;
+  font-size: 16px;
 }
 .text-node[size="big"] {
-  font-size: 20px;
+  font-size: 26px;
 }
 .text-node[size="huge"] {
-  font-size: 32px;
+  font-size: 42px;
 }
 .text-node.preview-mode {
   border: 2px solid blue;
