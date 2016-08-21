@@ -5,6 +5,7 @@ const INPUT_TYPES = {
   'node-text'      : 'nodeText',
   'node-type'      : 'nodeType',
   'node-font'      : 'nodeFont',
+  'node-size'      : 'nodeSize',
   'node-image-src' : 'nodeImageSrc'
 }
 
@@ -17,6 +18,7 @@ class NodeEditor {
     this.$nodeType = document.getElementById('node-type')
     this.$nodeText = document.getElementById('node-text')
     this.$nodeFont = document.getElementById('node-font')
+    this.$nodeSize = document.getElementById('node-size')
     this.$nodeImageSrc = document.getElementById('node-image-src')
 
     this.previewTextNode = new TextNode({ previewMode: true })
@@ -24,6 +26,7 @@ class NodeEditor {
     this.previewImageNode.hide()
 
     this.nodeType = 'text'
+    this.nodeSize = 'medium'
     this.nodeFont = 'inconsolata'
 
     this.initEventListeners()
@@ -32,10 +35,12 @@ class NodeEditor {
   clearFields() {
     this.$nodeText.value = ''
     this.$nodeFont.value = 'inconsolata'
+    this.$nodeSize.value = 'medium'
     this.$nodeImageSrc.value = ''
 
     this.nodeText = ''
     this.nodeFont = 'inconsolata'
+    this.nodeSize = 'medium'
     this.nodeImageSrc = ''
 
     this.updatePreviewNodes()
@@ -46,6 +51,7 @@ class NodeEditor {
     this.$nodeImageSrc.addEventListener('keyup', this.handleChange.bind(this))
     this.$nodeType.addEventListener('change', this.handleChange.bind(this))
     this.$nodeFont.addEventListener('change', this.handleChange.bind(this))
+    this.$nodeSize.addEventListener('change', this.handleChange.bind(this))
 
     this.$submitButton.addEventListener('click', this.submitNode.bind(this))
   }
@@ -56,6 +62,7 @@ class NodeEditor {
       type: this.nodeType || 'text',
       data: {
         src: this.nodeImageSrc,
+        size: this.nodeSize || 'medium',
         text: this.nodeText,
         coords: this.coords,
         font: this.nodeFont || 'inconsolata'

@@ -1,7 +1,7 @@
 import NodeEditor from './nodes/node-editor'
 import TextNode from './nodes/text-node'
 import ImageNode from './nodes/image-node'
-import { isValidNode } from './nodes'
+import { isValidConfig } from './nodes'
 import { isValidImageSrc } from './utils/image-link-validation'
 
 const $editor = document.getElementById('node-editor')
@@ -36,9 +36,12 @@ const warn = (message) => {
 }
 
 const handleSubmitNode = (config) => {
-  // if (!isValidNode(config)) return
+  if (!isValidConfig(config)) return
 
-  let data = { coords: config.data.coords }
+  let data = {
+    coords: config.data.coords,
+    size: config.data.size
+  }
 
   if (config.type === 'text') {
     data.text = config.data.text

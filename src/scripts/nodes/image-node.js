@@ -38,9 +38,14 @@ class ImageNode {
     if (this.previewMode) this.$node.classList.add('preview-mode')
     else this.$node.classList.remove('preview-mode')
 
-    if (!this.data || !this.data.coords) return
-    this.$node.style.left = this.data.coords[0] + 'px'
-    this.$node.style.top = this.data.coords[1] + 'px'
+    if (!this.data) return
+
+    if (this.data.size) this.$node.setAttribute('size', this.data.size)
+
+    if (this.data.coords) {
+      this.$node.style.left = this.data.coords[0] + 'px'
+      this.$node.style.top = this.data.coords[1] + 'px'
+    }
   }
 }
 

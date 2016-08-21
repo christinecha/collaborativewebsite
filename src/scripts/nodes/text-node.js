@@ -8,6 +8,7 @@
 *    createdBy: {String}
 *  @param destinationSelector {String} | A DOMNode selector
 **/
+
 class TextNode {
 
   constructor(config) {
@@ -49,6 +50,7 @@ class TextNode {
     this.$node.style.top = this.data.coords[1] + 'px'
 
     if (this.data.font) this.$node.setAttribute('font', this.data.font)
+    if (this.data.size) this.$node.setAttribute('size', this.data.size)
 
     if (this.previewMode) this.$node.classList.add('preview-mode')
     else this.$node.classList.remove('preview-mode')

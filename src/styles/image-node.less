@@ -1,6 +1,12 @@
 .image-node {
   position: absolute;
-  max-width: 200px;
+  max-width: 800px;
+
+  &[size="tiny"]    { max-width: 50px; }
+  &[size="small"]   { max-width: 150px; }
+  &[size="medium"]  { max-width: 300px; }
+  &[size="big"]     { max-width: 450px; }
+  &[size="huge"]    { max-width: 600px; }
 
   &.preview-mode {
     border: 2px solid blue;

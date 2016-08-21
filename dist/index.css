@@ -7,6 +7,9 @@ p {
   font-size: 13px;
   line-height: 1.5em;
 }
+b {
+  color: blue;
+}
 .xsmall {
   font-size: 11px;
 }
@@ -51,6 +54,21 @@ p {
 .text-node[font="libre-baskerville"] {
   font-family: 'Libre Baskerville';
 }
+.text-node[size="tiny"] {
+  font-size: 8px;
+}
+.text-node[size="small"] {
+  font-size: 11px;
+}
+.text-node[size="medium"] {
+  font-size: 15px;
+}
+.text-node[size="big"] {
+  font-size: 20px;
+}
+.text-node[size="huge"] {
+  font-size: 32px;
+}
 .text-node.preview-mode {
   border: 2px solid blue;
   padding: 5px;
@@ -59,7 +77,22 @@ p {
 }
 .image-node {
   position: absolute;
-  max-width: 200px;
+  max-width: 800px;
+}
+.image-node[size="tiny"] {
+  max-width: 50px;
+}
+.image-node[size="small"] {
+  max-width: 150px;
+}
+.image-node[size="medium"] {
+  max-width: 300px;
+}
+.image-node[size="big"] {
+  max-width: 450px;
+}
+.image-node[size="huge"] {
+  max-width: 600px;
 }
 .image-node.preview-mode {
   border: 2px solid blue;

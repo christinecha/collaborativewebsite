@@ -1,6 +1,6 @@
 const NODE_TYPES = {
-  text: ['font', 'text', 'coords'],
-  image: ['src']
+  text: ['font', 'size', 'text', 'coords'],
+  image: ['size', 'src']
 }
 
 /** Validating all the node types' data. **/
@@ -16,9 +16,10 @@ export const isValidConfig = (config) => {
 
   const model = NODE_TYPES[type]
 
-  for (let i in model) {
+  model.forEach(i => {
+    console.log(i)
     if (!data[i]) return false
-  }
+  })
 
   return true
 }
