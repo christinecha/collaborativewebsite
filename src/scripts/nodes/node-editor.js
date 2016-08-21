@@ -114,6 +114,8 @@ class NodeEditor {
       this.$container.style.top = y + 'px'
     }
 
+    if ((y - this.$container.clientHeight) < 0) this.$container.style.top = this.$container.clientHeight + 'px'
+
     this.$nodeText.focus()
 
     this.updatePreviewNodes()
