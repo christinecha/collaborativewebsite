@@ -113,11 +113,19 @@ b {
   padding: 5px;
 }
 #node-editor[type=image] #node-text,
-#node-editor[type=image] #node-font {
+#node-editor[type=image] #node-font,
+#node-editor[type=image] #node-color {
   display: none;
 }
 #node-editor[type=text] #node-image-src {
   display: none;
+}
+#node-editor #node-color {
+  width: 20px;
+  height: 20px;
+  background-image: url('../assets/colors.svg');
+  background-size: cover;
+  vertical-align: middle;
 }
 #node-editor #submit-node {
   padding: 5px;

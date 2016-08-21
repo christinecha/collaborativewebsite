@@ -19,6 +19,7 @@ class NodeEditor {
     this.$nodeText = document.getElementById('node-text')
     this.$nodeFont = document.getElementById('node-font')
     this.$nodeSize = document.getElementById('node-size')
+    this.$nodeColor = document.getElementById('node-color')
     this.$nodeImageSrc = document.getElementById('node-image-src')
 
     this.previewTextNode = new TextNode({ previewMode: true })
@@ -28,6 +29,7 @@ class NodeEditor {
     this.nodeType = 'text'
     this.nodeSize = 'medium'
     this.nodeFont = 'inconsolata'
+    this.nodeColor = '#000000'
 
     this.initEventListeners()
   }
@@ -38,6 +40,7 @@ class NodeEditor {
     this.$nodeSize.value = 'medium'
     this.$nodeImageSrc.value = ''
 
+    this.nodeColor = '#000000'
     this.nodeText = ''
     this.nodeFont = 'inconsolata'
     this.nodeSize = 'medium'
@@ -53,6 +56,7 @@ class NodeEditor {
     this.$nodeFont.addEventListener('change', this.handleChange.bind(this))
     this.$nodeSize.addEventListener('change', this.handleChange.bind(this))
 
+    this.$nodeColor.addEventListener('click', this.changeColor.bind(this))
     this.$submitButton.addEventListener('click', this.submitNode.bind(this))
   }
 
@@ -61,6 +65,7 @@ class NodeEditor {
       previewMode: true,
       type: this.nodeType || 'text',
       data: {
+        color: this.nodeColor,
         src: this.nodeImageSrc,
         size: this.nodeSize || 'medium',
         text: this.nodeText,
@@ -68,6 +73,19 @@ class NodeEditor {
         font: this.nodeFont || 'inconsolata'
       }
     }
+  }
+
+  changeColor() {
+    const chars = '0123456789abcdef'.split('')
+    let hex = '#'
+
+    while (hex.length < 7) {
+      const rand = Math.round(Math.random() * (chars.length - 1))
+      hex += chars[rand]
+    }
+
+    this.nodeColor = hex
+    this.updatePreviewNodes()
   }
 
   handleChange(e) {

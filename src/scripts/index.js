@@ -50,6 +50,7 @@ const handleSubmitNode = (config) => {
   if (config.type === 'text') {
     data.text = config.data.text
     data.font = config.data.font
+    data.color = config.data.color
     config.data = data
     createNode(config)
   }

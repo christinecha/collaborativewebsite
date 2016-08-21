@@ -13,11 +13,20 @@
 
   &[type=image] {
     #node-text,
-    #node-font { display: none; }
+    #node-font,
+    #node-color { display: none; }
   }
 
   &[type=text] {
     #node-image-src { display: none; }
+  }
+
+  #node-color {
+    width: 20px;
+    height: 20px;
+    background-image: url('../assets/colors.svg');
+    background-size: cover;
+    vertical-align: middle;
   }
 
   #submit-node {

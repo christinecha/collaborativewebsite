@@ -51,6 +51,7 @@ class TextNode {
 
     if (this.data.font) this.$node.setAttribute('font', this.data.font)
     if (this.data.size) this.$node.setAttribute('size', this.data.size)
+    if (this.data.color) this.$node.style.color = this.data.color
 
     if (this.previewMode) this.$node.classList.add('preview-mode')
     else this.$node.classList.remove('preview-mode')

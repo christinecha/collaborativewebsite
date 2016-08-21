@@ -1,5 +1,5 @@
 const NODE_TYPES = {
-  text: ['font', 'size', 'text', 'coords'],
+  text: ['color', 'font', 'size', 'text', 'coords'],
   image: ['size', 'src']
 }
 
