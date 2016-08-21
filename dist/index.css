@@ -131,7 +131,7 @@ b {
   margin: 20px 0;
   z-index: 3;
   background-color: rgba(255, 255, 255, 0.8);
-  position: relative;
+  position: fixed;
 }
 #wtf .trigger-open:hover,
 #wtf .trigger-close:hover {
