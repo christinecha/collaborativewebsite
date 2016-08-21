@@ -149,7 +149,7 @@ $mailingList.addEventListener('submit', (e) => {
 
 firebase.auth().onAuthStateChanged(auth => {
 
-  if (!auth.uid) {
+  if (!auth || !auth.uid) {
     firebase.auth().signInAnonymously()
     return
   }

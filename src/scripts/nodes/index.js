@@ -17,7 +17,6 @@ export const isValidConfig = (config) => {
   const model = NODE_TYPES[type]
 
   model.forEach(i => {
-    console.log(i)
     if (!data[i]) return false
   })
 
