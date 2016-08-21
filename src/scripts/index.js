@@ -128,8 +128,8 @@ document.addEventListener('click', (e) => {
     return
   }
 
-  const x = e.clientX
-  const y = e.clientY
+  const x = e.pageX
+  const y = e.pageY
   nodeEditor.renderAt(x, y)
 })
 
