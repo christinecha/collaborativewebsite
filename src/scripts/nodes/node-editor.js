@@ -102,7 +102,7 @@ class NodeEditor {
   renderAt(x, y) {
     this.coords = [x, y]
 
-    this.$container.style.display = 'block'
+    this.$container.style.display = 'inline-block'
 
     if ((window.innerWidth - x) < this.$container.clientWidth) {
       this.$container.style.right = 0
