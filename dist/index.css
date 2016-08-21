@@ -109,6 +109,9 @@ b {
   padding: 5px;
   z-index: 2;
 }
+#node-editor input {
+  padding: 5px;
+}
 #node-editor[type=image] #node-text,
 #node-editor[type=image] #node-font {
   display: none;
