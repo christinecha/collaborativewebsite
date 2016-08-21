@@ -39,6 +39,9 @@ b {
 .text-node[font="inconsolata"] {
   font-family: 'Inconsolata';
 }
+.text-node[font="comic-sans"] {
+  font-family: 'Comic Sans MS';
+}
 .text-node[font="georgia"] {
   font-family: 'Georgia';
 }
