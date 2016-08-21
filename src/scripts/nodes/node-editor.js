@@ -109,6 +109,7 @@ class NodeEditor {
       this.$container.style.left = 'auto'
       this.$container.style.top = y + 'px'
     } else {
+      this.$container.style.right = 'auto'
       this.$container.style.left = x + 'px'
       this.$container.style.top = y + 'px'
     }
