@@ -1,4 +1,5 @@
 const NODE_TYPES = {
+  box: ['size', 'color'],
   text: ['color', 'font', 'size', 'text', 'coords'],
   image: ['size', 'src']
 }

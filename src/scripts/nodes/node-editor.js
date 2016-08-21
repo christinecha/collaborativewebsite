@@ -1,7 +1,9 @@
 import TextNode from './text-node'
 import ImageNode from './image-node'
+import BoxNode from './box-node'
 
 const INPUT_TYPES = {
+  'node-color'      : 'nodeColor',
   'node-text'      : 'nodeText',
   'node-type'      : 'nodeType',
   'node-font'      : 'nodeFont',
@@ -24,7 +26,10 @@ class NodeEditor {
 
     this.previewTextNode = new TextNode({ previewMode: true })
     this.previewImageNode = new ImageNode({ previewMode: true })
+    this.previewBoxNode = new BoxNode({ previewMode: true })
+
     this.previewImageNode.hide()
+    this.previewBoxNode.hide()
 
     this.nodeType = 'text'
     this.nodeSize = 'medium'
@@ -101,12 +106,21 @@ class NodeEditor {
     if (this.nodeType === 'text')  {
       this.previewTextNode.update(this.getConfig())
       this.previewTextNode.show()
+      this.previewBoxNode.hide()
       this.previewImageNode.hide()
     }
 
     if (this.nodeType === 'image') {
       this.previewImageNode.update(this.getConfig())
       this.previewImageNode.show()
+      this.previewBoxNode.hide()
+      this.previewTextNode.hide()
+    }
+
+    if (this.nodeType === 'box') {
+      this.previewBoxNode.update(this.getConfig())
+      this.previewBoxNode.show()
+      this.previewImageNode.hide()
       this.previewTextNode.hide()
     }
   }
@@ -115,6 +129,7 @@ class NodeEditor {
     this.$container.style.display = 'none'
     this.previewTextNode.hide()
     this.previewImageNode.hide()
+    this.previewBoxNode.hide()
   }
 
   renderAt(x, y) {

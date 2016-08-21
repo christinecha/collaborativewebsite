@@ -5,6 +5,7 @@ console.log('-------------------------------------------------------------------
 import NodeEditor from './nodes/node-editor'
 import TextNode from './nodes/text-node'
 import ImageNode from './nodes/image-node'
+import BoxNode from './nodes/box-node'
 import { isValidConfig } from './nodes'
 import { isValidImageSrc } from './utils/image-link-validation'
 
@@ -21,6 +22,7 @@ const nodeEditor = new NodeEditor({
 })
 
 const NODE_CONSTRUCTORS = {
+  box: BoxNode,
   text: TextNode,
   image: ImageNode
 }
@@ -50,6 +52,12 @@ const handleSubmitNode = (config) => {
   if (config.type === 'text') {
     data.text = config.data.text
     data.font = config.data.font
+    data.color = config.data.color
+    config.data = data
+    createNode(config)
+  }
+
+  if (config.type === 'box') {
     data.color = config.data.color
     config.data = data
     createNode(config)

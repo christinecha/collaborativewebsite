@@ -1,0 +1,16 @@
+.box-node {
+  position: absolute;
+
+  &[size="tiny"]    { width: 20px; height: 20px; }
+  &[size="small"]   { width: 50px; height: 50px; }
+  &[size="medium"]  { width: 100px; height: 100px; }
+  &[size="big"]     { width: 150px; height: 150px; }
+  &[size="huge"]    { width: 200px; height: 200px; }
+
+  &.preview-mode {
+    border: 2px solid blue;
+    padding: 5px;
+    margin: -5px;
+    z-index: 1;
+  }
+}
